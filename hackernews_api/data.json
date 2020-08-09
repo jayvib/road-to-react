@@ -1,0 +1,34 @@
+[
+  {
+    "title": "React",
+    "url": "https://facebook.github.io/react/",
+    "author": "Jordan Walke",
+    "num_comments": 3,
+    "points": 4,
+    "objectID": 0
+  },
+  {
+    "title": "Redux",
+    "url": "https://github.com/reactjs/js/redux",
+    "author": "Dan Abramov, Andrew Clark",
+    "num_comments": 2,
+    "points": 5,
+    "objectID": 1
+  },
+  {
+    "title": "Golang",
+    "url": "https://github.com/go",
+    "author": "Rob Pike",
+    "num_comments": 2,
+    "points": 10,
+    "objectID": 4
+  },
+  {
+    "title": "Python",
+    "url": "https://github.com/python",
+    "author": "Guido Van Russom",
+    "num_comments": 2,
+    "points": 10,
+    "objectID": 4
+  }
+]
