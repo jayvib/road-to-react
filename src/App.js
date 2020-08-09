@@ -31,8 +31,7 @@ const list = [
 const names = [ "Luffy", "Nami", "Sanji", "Zoro" ];
 
 const DEFAULT_QUERY = 'redux';
-
-const PATH_BASE = 'http://127.0.0.1:8083';
+const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 
@@ -76,8 +75,14 @@ class App extends Component{
   }
 
   onDismiss(objectID) {
-    const updateList = this.state.list.filter(item => item.objectID !== objectID);
-    this.setState({list: updateList});
+    const isNotId = item => item.objectID !== objectID;
+    const updateHits = this.state.result.hits.filter(isNotId);
+    this.setState({
+      result:{
+        ...this.state.result,
+        hits: updateHits},
+      },
+    );
   }
 
   onSearchChange(event) {
@@ -88,7 +93,6 @@ class App extends Component{
   render() {
     const { searchTerm, result } = this.state;
     if (!result) { return null; }
-    console.log(result);
     return (
       <div className="page">
         <div className="interactions">
@@ -99,41 +103,16 @@ class App extends Component{
             Search
           </Search>
         </div>
-        <Table // Table Component
-          searchTerm={searchTerm} // Current searchTerm
-          list={result.hits} // Latest list
-          onDismiss={this.onDismiss} // Handler for click event
-        />
+        { result
+          ? <Table // Table Component
+            searchTerm={searchTerm} // Current searchTerm
+            list={result.hits} // Latest list
+            onDismiss={this.onDismiss} // Handler for click event
+          />
+          : null
+        }
       </div>
     );
-  }
-}
-
-class SearchHeader extends Component {
-  render() {
-    return(
-      <span>Search</span>
-    )
-  }
-}
-
-class HelloList extends Component {
-  render() {
-    const { names } = this.props;
-    return(
-      <div className="hello">
-        {names.map((name, i) => <Hello key={i} name={name}/>)}
-      </div>
-    )
-  }
-}
-
-class Hello extends Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <h1>Hello {name}</h1>
-    )
   }
 }
 
